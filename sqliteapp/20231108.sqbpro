@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/jiho/Desktop/ESE_Database_2023_2/20231108.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser query" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1305"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:mainStudent"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Apply" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="31"/><column index="2" value="53"/><column index="3" value="83"/><column index="4" value="52"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Student" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="31"/><column index="2" value="47"/><column index="3" value="30"/><column index="4" value="44"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">-- edit 시도
+--INSERT into Student values (111, 'jiho',4.9,1000);
+--UPDATE Student set sid=100 where sid=123
+-- set to valuse from Where value
+
+-- get GPA &gt; 3.6인 id, name, gpa
+-- SELECT sID, sName, GPA
+-- FROM Student
+-- WHERE GPA&gt;3.6
+
+-- cs에 합격한 학생의 id
+-- SELECT sID
+-- from Apply
+-- where decision='Y' AND major='CS'
+
+-- JOIN
+-- SELECT *
+-- from Student, Apply
+-- WHERE Student.sID = Apply.sID
+
+-- 지원한 학생의 sid, name, gpa, uni name, uni's enrollment
+-- SELECT Student.sID, Student.sName, Student.GPA, College.cName, College.enrollment
+-- from Student, Apply, College
+-- WHERE Student.sID = Apply.sID AND Apply.cName = College.cName
+
+-- str  patten
+-- 거주 도시가 휴스턴, 텍사스인 모든 종업원
+--WHERE ADDRESS LIKE '%휴스턴, 텍사스%'
+
+-- bio 관련 학과에 지원한 학생의 id, major
+-- 해당 자리에 제시한 char가 있는지 검색
+SELECT sID, major
+FROM Apply
+WHERE major like 'C_'</sql><current_tab id="0"/></tab_sql></sqlb_project>
