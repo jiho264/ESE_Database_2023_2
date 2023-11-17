@@ -30,6 +30,8 @@
 -- WHERE major like 'C_'
 
 -- 지원한 학생의 sid, name, gpa, uni name, uni's enrollment
-SELECT Student.sID, Student.sName, Student.GPA, College.cName, College.enrollment
-from Student, Apply, College
-WHERE Student.sID = Apply.sID AND Apply.cName = College.cName
+-- SELECT Student.sID, Student.sName, Student.GPA, College.cName, College.enrollment
+-- from Student, Apply, College
+-- WHERE Student.sID = Apply.sID AND Apply.cName = College.cName
+
+-- "productX" 프로젝트에 참여가는 모든 사원의 급여를 10% 올린 경우의 급여를 검색하라
