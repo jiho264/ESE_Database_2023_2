@@ -1,172 +1,72 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/jiho/Desktop/ESE_Database_2023_2/sqliteapp/20231108.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser query" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1305"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:mainCollege"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Apply" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="31"/><column index="2" value="53"/><column index="3" value="83"/><column index="4" value="52"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="College" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="53"/><column index="2" value="35"/><column index="3" value="64"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Student" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="31"/><column index="2" value="47"/><column index="3" value="30"/><column index="4" value="44"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">-- edit 시도
---INSERT into Student values (111, 'jiho',4.9,1000);
---UPDATE Student set sid=100 where sid=123
--- set to valuse from Where value
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/jiho/Desktop/ESE_Database_2023_2/sqliteapp/20231108.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser query" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1305"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:mainApply"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Apply" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="31"/><column index="2" value="53"/><column index="3" value="83"/><column index="4" value="52"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="College" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="53"/><column index="2" value="35"/><column index="3" value="64"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Student" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="31"/><column index="2" value="47"/><column index="3" value="30"/><column index="4" value="44"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">-- null 찾기
+-- WHERE sname is NULL
 
--- get GPA &gt; 3.6인 id, name, gpa
+-- INSERT INTO Student VALUES (431, 'kevin', NULL, 1500);
+-- INSERT INTO Student VALUES (432, 'junsick', NULL, 2500);
+
+-- GPA가 3.5이상인 sid, sname, GPA
 -- SELECT sID, sName, GPA
 -- FROM Student
--- WHERE GPA&gt;3.6
-
--- cs에 합격한 학생의 id
--- SELECT sID
--- from Apply
--- where decision='Y' AND major='CS'
-
--- JOIN
--- SELECT *
--- from Student, Apply
--- WHERE Student.sID = Apply.sID
-
--- 지원한 학생의 sid, name, gpa, uni name, uni's enrollment
--- SELECT Student.sID, Student.sName, Student.GPA, College.cName, College.enrollment
--- from Student, Apply, College
--- WHERE Student.sID = Apply.sID AND Apply.cName = College.cName
-
--- str  patten
--- 거주 도시가 휴스턴, 텍사스인 모든 종업원
---WHERE ADDRESS LIKE '%휴스턴, 텍사스%'
-
--- bio 관련 학과에 지원한 학생의 id, major
--- 해당 자리에 제시한 char가 있는지 검색
--- SELECT sID, major
--- FROM Apply
--- WHERE major like 'C_'
-
--- QUERY 결과의 sort
--- DESC : descending (Z - A)
--- ASC : Ascending (A- Z)
--- ex) ORDER BY DNAME, LNAME ASC, FNAME ASC
--- SELECT 
--- FROM
--- WHERE
--- ORDER BY 
-
--- alias : sub name
--- rename 2번 쓴 것. can't replacable
--- FROM EMPLOYEE E, EMPLOYEE S
--- FROM EMPLOYEE AS E(FN, MI, LN, ~~~~~~~~~~~~~)
-
--- scaledGPA를 구하시오
--- SELECT sID, sName, GPA, sizeHS, GPA*(sizeHS/1000) as scaledGPA
--- FROM Student
-
--- rename 써서 3개의 조인 출력
--- SELECT S.sID, S.GPA, A.cName, C. enrollment
--- FROM Student AS S, Apply AS A, College AS C
--- WHERE S.sID = A.sID AND A.cName = C.cName
-
--- gpa가 같은 학생의 쌍
- -- 학생1의 id, name, 학생2의 id, name, GPA
---  SELECT s1.sID, s1.sName, s2.sID, s2.sName, s1.GPA
---  FROM Student AS S1, Student AS S2
---  WHERE S1.GPA = S2.GPA AND S1.sID &lt; S2.sID
---  ORDER BY S1.sID ASC;
-
--- 집합
--- (____) UNION (_____)
--- 자동으로 중복 제거함.
--- SELECT sName AS NAME FROM Student
+-- WHERE GPA &lt; 3.5
 -- UNION
--- SELECT cName AS NAME FROM College
--- ORDER BY NAME;
-
--- CS, EE에 모두 지원한 학생 id
--- SELECT sID AS NAME
--- FROM Apply
--- WHERE major='CS'
--- UNION
--- SELECT sID AS NAME
--- FROM Apply
--- WHERE major='EE'
-
--- SELECT DISTINCT A1.sID
--- FROM Apply AS A1, Apply AS A2
--- WHERE A1.sID = A2.sID AND A1.major='CS' AND A2.major='EE' 
-
-
--- cs에는 지원하고 ee에는 지원하지 않은 학생들
--- SELECT sID AS NAME
--- FROM Apply
--- WHERE major='CS'
--- EXCEPT
--- SELECT sID AS NAME
--- FROM Apply
--- WHERE major='EE'
-
--- Thu Nov 16
--- CS에 지원한 학생의 ID, name을 구하시오 WITH JOIN
--- SELECT DISTINCT Student.sID,Student. sName
--- FROM Apply, Student
--- WHERE Apply.sID = Student.sID
-
--- CS에 지원한 학생의 ID, name을 구하시오 WITHOUT JOIN
--- 중첩질의
--- SELECT sID, sName
+-- SELECT sID, sName, GPA
 -- FROM Student
--- WHERE	sID IN (SELECT sID FROM Apply WHERE major='CS')
+-- WHERE GPA &gt;= 3.5
 
--- CS에 지원한 학생의 GPA WITH JOIN -- 7개 출력, DISTINCT하면 오히려 4개가 되어버림 ; sID가 아니라 GPA같은 경우를 지워버림
--- SELECT Student.GPA
--- FROM Student, Apply
--- WHERE Student.sID = Apply.sID AND Apply.major = 'CS'
-
-
--- CS에 지원한 학생의 GPA WITHOUT JOIN -- 5개 출력; DISTINCT 이후 4개. 
--- SELECT DISTINCT GPA
+-- SELECT sID, sName, GPA
 -- FROM Student
--- WHERE sID IN (SELECT sID FROM Apply WHERE major = 'CS')
+-- WHERE GPA &gt;= 3.5 or GPA &lt; 3.5 or GPA is NULL
 
--- CS에는 지원하고, EE에는 지원하지 않은 학생의 sID, sName with EXCEPT
--- SELECT Student.sID, Student.sName
--- FROM Student, Apply
--- WHERE Apply.major='CS'  AND Student.sID = Apply.sID
--- EXCEPT -- 자동으로 중복 제거됨
--- SELECT Student.sID, Student.sName
--- FROM Student, Apply
--- WHERE Apply.major='EE'  AND Student.sID = Apply.sID
-
--- CS에는 지원하고, EE에는 지원하지 않은 학생의 sID, sName with in or not in
--- SELECT sID, sName
+-- DELETE 
 -- FROM Student
--- WHERE sID 
--- IN (SELECT sID FROM Apply WHERE major='CS') AND
--- sID NOT IN (SELECT sID FROM Apply WHERE major='EE')
+-- WHERE GPA is NULL
 
--- same state에 다른 대학이 있는 대학의 이름과 state
--- SELECT cName, state
--- FROM College C1
--- WHERE EXISTS (
--- 	SELECT * 
--- 	FROM College	C2
--- 	WHERE C1.state = C2.state AND C1.cName &lt;&gt; C2.cName
--- 	-- &lt;&gt; : not equal
--- 	)
--- 	-- not EXISTS 하면, 반대 쌍인 대학이 나옴
+-- INSERT into College VALUES ('CMU', 'PA', 11500)
 
--- College's enrollment가 가장많은 대학의 이름
--- SELECT cName
--- FROM College as c1
--- WHERE NOT EXISTS (
--- 	SELECT *
--- 	FROM College as c2
--- 	WHERE c1.enrollment &lt; c2.enrollment
--- 	)
+-- 어느 대학에도 지원하지 않은 학생의 sID를 구한 뒤, cmu - cs에 지원했는데 결과는 정해지지 않음을 Apply 에 추가
 
---- GPA가 가장 높은 학생의 이름과 GPA
--- SELECT  sName, GPA, sID
--- FROM Student as s1
--- WHERE NOT EXISTS(
--- 	SELECT *
--- 	FROM Student as s2
--- 	WHERE s1.GPA &lt; s2.GPA
--- 	)
+-- INSERT into Apply VALUES(
+-- 	(SELECT sID
+-- 	FROM Student
+-- 	WHERE sID not in (SELECT sID FROM Apply))
+-- 	, 'CMU', 'CS', NULL)
 
--- 모든 학생의 gpa의 평균을 구하시오
--- SELECT avg(GPA), max(GPA), min(GPA), sum(GPA)
+
+-- INSERT INTO Apply 
+-- 	SELECT sID, 'CMU', 'CS', NULL
+-- 	FROM Student
+-- 	WHERE sID not in (SELECT sID FROM Apply)
+
+-- 다른 대학 ee에 지원했으나 떨어진 학생을 cmu ee에 합격한 것으로 처리하시오
+-- SELECT sID, 'CMU', 'EE', 'Y'
 -- FROM Student
+-- WHERE sID not in (SELECT sID FROM Apply WHERE decision = 'N' AND major = 'EE')
 
--- CS지원자 중 성적 제일 낮은 GPA
-SELECT min(Student.GPA)
-FROM Apply, Student
-WHERE Apply.sID = Student.sID AND Apply.major = 'CS'</sql><current_tab id="0"/></tab_sql></sqlb_project>
+--INSERT INTO Apply
+--    SELECT sID, 'CMU', 'EE', 'Y'
+--    FROM Apply
+--    WHERE major= 'EE' AND decision = 'N';
+
+
+-- DELETE 
+-- FROM College
+-- WHERE cName = 'CMU'
+
+-- 2개 보다 많은 전공에 지원한 학생 Student에서 지우시오
+-- DELETE
+-- FROM Student
+-- WHERE sID in 
+-- (
+-- 	SELECT sID
+-- 	FROM Apply
+-- 	GROUP by sID
+-- 	HAVING count(distinct major) &gt; 2
+-- )
+
+
+-- UPDATE Student
+-- SET sID = '111'
+-- WHERE sName = 'Bob'
+SELECT *
+FROM Student
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
