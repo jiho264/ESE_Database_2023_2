@@ -248,7 +248,137 @@
 -- HAVING count(*) < 5
 
 -- 지원학생이 5명 미만인 대학의 이름
-SELECT cName, count(DISTINCT sID)
-FROM Apply
-GROUP by cName
-HAVING count(DISTINCT sID)< 5
+-- SELECT cName, count(DISTINCT sID)
+-- FROM Apply
+-- GROUP by cName
+-- HAVING count(DISTINCT sID)< 5
+
+-- null 찾기
+-- WHERE sname is NULL
+
+-- INSERT INTO Student VALUES (431, 'kevin', NULL, 1500);
+-- INSERT INTO Student VALUES (432, 'junsick', NULL, 2500);
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- GPA가 3.5이상인 sid, sname, GPA
+-- SELECT sID, sName, GPA
+-- FROM Student
+-- WHERE GPA < 3.5
+-- UNION
+-- SELECT sID, sName, GPA
+-- FROM Student
+-- WHERE GPA >= 3.5
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- SELECT sID, sName, GPA
+-- FROM Student
+-- WHERE GPA >= 3.5 or GPA < 3.5 or GPA is NULL
+
+-- DELETE 
+-- FROM Student
+-- WHERE GPA is NULL
+
+-- INSERT into College VALUES ('CMU', 'PA', 11500)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- 어느 대학에도 지원하지 않은 학생의 sID를 구한 뒤, cmu - cs에 지원했는데 결과는 정해지지 않음을 Apply 에 추가
+
+-- INSERT into Apply VALUES(
+-- 	(SELECT sID
+-- 	FROM Student
+-- 	WHERE sID not in (SELECT sID FROM Apply))
+-- 	, 'CMU', 'CS', NULL)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- INSERT INTO Apply 
+-- 	SELECT sID, 'CMU', 'CS', NULL
+-- 	FROM Student
+-- 	WHERE sID not in (SELECT sID FROM Apply)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- 다른 대학 ee에 지원했으나 떨어진 학생을 cmu ee에 합격한 것으로 처리하시오
+-- SELECT sID, 'CMU', 'EE', 'Y'
+-- FROM Student
+-- WHERE sID not in (SELECT sID FROM Apply WHERE decision = 'N' AND major = 'EE')
+------------------------------------------------------------------------------------------------------------------------------------------------------
+--INSERT INTO Apply
+--    SELECT sID, 'CMU', 'EE', 'Y'
+--    FROM Apply
+--    WHERE major= 'EE' AND decision = 'N';
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- DELETE 
+-- FROM College
+-- WHERE cName = 'CMU'
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- 2개 보다 많은 전공에 지원한 학생 Student에서 지우시오
+-- DELETE
+-- FROM Student
+-- WHERE sID in 
+-- (
+-- 	SELECT sID
+-- 	FROM Apply
+-- 	GROUP by sID
+-- 	HAVING count(distinct major) > 2
+-- )
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- UPDATE Student
+-- SET sID = '111'
+-- WHERE sName = 'Bob'
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- cs에 지원하고 합격한 사람의 id, 대학이름을 구하시오
+-- CREATE VIEW CSaccept as 
+-- 	SELECT sID, cName
+-- 	FROM Apply
+-- 	WHERE major = 'CS' AND decision = 'Y'
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- the sid, sname, gpa of stanford & CS = Y & GPA > 3.8
+-- SELECT Student.sID, CSaccept.cName, Student.GPA
+-- FROM CSaccept, Student
+-- WHERE Student.GPA < 3.8 AND cName = 'Stanford' AND Student.sID = CSaccept.sID
+
+-- SELECT Student.sID, CSaccept.cName, Student.GPA
+-- FROM Student, 
+-- (
+-- 	SELECT sID, cName
+-- 	FROM Apply
+-- 	WHERE major = 'CS' AND decision = 'Y'
+-- 
+-- ) as CSaccept
+-- WHERE Student.GPA < 3.8 AND cName = 'Stanford' AND Student.sID = CSaccept.sID
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Berkeley 대학에 합격한 학생의 sID
+-- CREATE VIEW CSBerkAccept as
+-- SELECT Student.sID, Student.sName, Student.GPA
+-- FROM Student, Apply
+-- WHERE Student.sID = Apply.sID AND Apply.cName = 'Berkeley' AND Apply.decision = 'Y'
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Berkeley CS = Y & GPA > 3.8
+-- SELECT sID, sName, GPA
+-- FROM Student, 
+-- 	(SELECT sID, sName, GPA
+-- 	FROM 
+-- 		(SELECT sID, sName, cName
+-- 		FROM Apply
+-- 		WHERE major = 'CS' AND decision = 'Y' )as CSaccept
+-- 	WHERE cName = 'Berkeley') as CSBerkAccept
+-- WHERE GPA > 3.8
+
+-- drop view CSBerkAccept3
+
+--INSERT INTO CSaccept VALUES (491, 'dja', 'ddd')
+-- result : can not modify csaccpet because it is a view
+
+-- CREATE mega
+-- CREATE VIEW Mega as
+-- SELECT Student.sID, sName, GPA, sizeHS, College.cName, state, enrollment, major, decision
+-- FROM Student, Apply, College
+-- WHERE Student.sID = Apply.sID AND Apply.cName = College.cName
+
+-- GPA > 3.5 , cs, enrollment > 15k인 학생의 sID, sName, cName
+-- SELECT sID, sName, cName
+-- FROM Mega
+-- WHERE GPA > 3.5 AND major = 'CS' AND enrollment > 15000
+
+-- DROP VIEW CSBerkAccept
+

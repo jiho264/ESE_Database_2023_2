@@ -1,4 +1,4 @@
-Database Project, Lecture note, Assignment, etc.
+Lecture note
 
 At 2023-2
 
