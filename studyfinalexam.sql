@@ -108,6 +108,7 @@
 -- SELECT cName, major, min(gpa), max(gpa) from Student, Apply
 -- where Student.sID = Apply.sID 
 -- group by cname, major
+-- >>>이거틀렷음. 버클리 CS에서 반례나옴.
 
 -- 24. 각 학생별 sID, sName과 지원한 총 원서 수
 -- SELECT Student.sID, sName, count(*) from Apply, Student
@@ -155,7 +156,7 @@
 -- 	where sID not in (SELECT sID from Apply)),
 -- 	 'CMU', 'CS', NULL)
 -- 	 이거 하위쿼리 결과 head()한개만 실행됨. 결과대로 다 추가하려면 다른 방식으로 해야함.
-	 
+
 -- 	 INSERT into Apply 
 -- 		SELECT sID, 'CMU', 'CS', NULL
 -- 		from Student
@@ -197,3 +198,46 @@
 -- 40. mit cs합격생구하기 
 -- SELECT DISTINCT * from mega
 -- WHERE cName= 'MIT' and decision= 'Y' and major='CS'
+
+
+
+-- Path: studyfinalexam.sql
+-- SELECT Student.sID, sName, count(*) from Apply, Student
+-- where Student.sID = Apply.sID
+-- group by Student.sID
+
+-- 각 학생별 풀정보 및 지원한 원서 수
+-- SELECT Student.sid, count(*)  from Student, Apply where Student.sID=Apply.sID group by Apply.sID
+
+-- 각 학생의 학교별 지원원서 수 
+-- SELECT Student.sID, sName, cName,  count(*) 
+-- from Student, Apply
+-- WHERE Student.sID=Apply.sID
+-- group by Student.sID, cName
+
+-- select s.sID as ooo, sName, GPA, sizeHS
+-- from student as s, Apply
+-- WHERE ooo = Apply.sID
+
+-- stanford 합격자 평균 gpa보다 높은 gpa소유자
+-- SELECT *  from Student 
+-- where GPA > (	
+-- 		SELECT avg(gpa) as avgpa from Student, Apply 
+-- 		where Student.sID = Apply.sID AND cName='Stanford' and decision='Y')   		
+
+-- 동명이인 중 더 높은 gpa가진사람의 sid, GPA
+-- SELECT Student.sID, Student.sName, max(Student.GPA)
+-- from Student
+-- where Student.sName in
+-- 	(SELECT s1.sName 
+-- 	from Student s1, Student s2
+-- 	WHERE s1.sName=s2.sName and s1.sID < s2.sID)
+-- group by Student.sName
+
+
+-- Apply 3회 이상 한 사람
+-- SELECT sName, count(*)
+-- from Student, Apply
+-- WHERE Student.sID = Apply.sID
+-- GROUP by Student.sID
+-- having count(*)>2

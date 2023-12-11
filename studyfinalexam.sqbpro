@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/jiho/Desktop/ESE_Database_2023_2/studyfinalexam.sqlite" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser query" current="2"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="934"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:mainApply"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">-- 1. 테이블에 값 삽입; 
+	-- insert into student values (432, 'Dja', 4.2, 2300)
+	
+-- 2. 간단한 조건문;
+	-- SELECT * from Student where gpa&gt;4
+	
+-- 3. CS이고 합격한사람 이름
+-- SELECT sName from Student, Apply WHERE Student.sID=Apply.sID and major='CS' and decision='Y'
+
+-- 4.이름에 j들어간 학생 -&gt; 이거 대소문자 구분 없음.
+-- SELECT * from Student where sName like '%j%'
+
+-- 5. sid 끝자리가 2
+-- SELECT * from Student where sid like '__2'
+
+-- 6. sort
+-- SELECT * from Student order by sName asc
+-- SELECT * from Student order by sName desc
+
+-- 7. alias : 
+-- SELECT *from Student S where S.gpa &gt; 4
+
+-- 8. selete에서 산술연산
+-- SELECT sID, sName, GPA*2 from Student
+
+-- 9. gpa 같은 순서쌍
+-- SELECT  s1.sID, s1.sName, s2.sID, s2.sName, s1.GPA from Student s1, Student s2
+-- where s1.GPA = s2.GPA and s1.sID &lt; s2.sID
+
+-- 10. 학교이름 + 학생이름 집합
+-- SELECT sName from Student union SELECT cName from College
+
+-- 11. CS지원학생 + EE지원학생 
+-- SELECT sID from Apply where major='CS' 
+-- union -- INTERSECT
+-- SELECT sID from Apply where major='EE'
+
+-- 12. CS지원한 학생의 이름을 WITHOUT JOIN
+-- SELECT sName, sid from Student where sID in 
+-- (SELECT sID from Apply where major='CS')
+
+-- 13. CS에는 지원하고 EE에는 지원하지 않은 학생의 sid, sName (use EXCEPT, 중복제거)
+-- SELECT S.sid, sName from Student S, Apply A where S.sID=A.sID and major='CS'
+-- EXCEPT 
+-- SELECT S.sid, sName from Student S, Apply A where S.sID=A.sID and major='EE'
+
+-- 14. CS에는 지원하고 EE에는 지원하지 않은 학생의 sid, sName (use not in )
+-- SELECT Student.sID, sName from Student, Apply where Student.sID=Apply.sID AND major='CS'
+-- and Student.sID not in
+-- (SELECT sID from Apply where major='EE')
+-- group by Student.sID
+
+-- 15.  same state에 다른 대학이 있는 대학의 cName, state
+-- SELECT c1.cName, c1.state from College c1, College c2 WHERE c1.state = c2.state and c1.cName!=c2.cName
+
+-- 16. 학생 수 가장 많은 대학교
+-- SELECT * from College where enrollment = (SELECT max(enrollment) from College)
+
+-- 17. gpa제일 높은 학생 찾기
+-- SELECT * from Student where GPA = (SELECT max(gpa) from Student)
+
+-- 18. gpa 평균
+-- SELECT avg(gpa) from Student
+
+-- 19. CS 지원자중 gpa 꼴등
+-- SELECT * from Student where gpa = (SELECT min(gpa) from Student, Apply where Student.sID=Apply.sID and major='CS')
+
+
+-- 20. gpa가 3.6이상인 학생 수
+-- SELECT count(*) from Student where gpa&gt;=3.6
+
+-- 21. 각 대학교 별 apply 건 수
+-- SELECT cName, count(*) from Apply group by cName
+
+-- 22. 각 state별 등록학생 수의 합
+-- SELECT state, sum(enrollment) from College group by state
+
+-- 23. 대학별의 전공별 지원자의 최대 및 최소 GPA -- 이거 어려움
+SELECT cName, major, min(gpa), max(gpa)
+from Student, Apply
+where Student.sID=Apply.sID 
+group by cName, major
+
+
+-- 24. 각 학생별 sID, sName과 지원한 총 원서 수
+
+-- 25. 각 학생별 sID, sName과 각 대학별 지원한 원서 수
+
+-- 26. 지원서의 숫자가 5보다 작은 대학의 이름
+
+-- 27. applied sID 5명 이하인 학교이름 -- 지원서 수를 구할 떄 쓴 sid에 distinct 걸어야함. 타 전공 지원했기때문.
+
+-- 28. finding NULL
+
+-- 29. insert VALUES
+
+-- 30. delete
+
+-- 31. 어느 대학에도 지원하지 않은 학생의 정보
+
+-- 32. 어느 대학에도 지원하지 않은 학생을 강제로 CMU의 CS에 지원하고 decision은 null로 추가
+
+-- 33.  타 대학 EE에 지원했지만, 떨어진 사람을 cmu ee에 합격시키셈
+
+-- 34. 2개보다 많은 전공에 지원한 학생을 student에서 지우시오
+
+-- 35. update
+
+-- 36. 이중쿼리 alias; 전체 cs합격생 중, 스탠포드 합격자 구하기
+
+-- 37. MIT 합격자 view 만들기
+
+-- 38. drop view; 
+
+-- 39. mega TABLE
+
+-- 40. mit cs합격생구하기 
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
