@@ -108,7 +108,6 @@
 -- SELECT cName, major, min(gpa), max(gpa) from Student, Apply
 -- where Student.sID = Apply.sID 
 -- group by cname, major
--- >>>이거틀렷음. 버클리 CS에서 반례나옴.
 
 -- 24. 각 학생별 sID, sName과 지원한 총 원서 수
 -- SELECT Student.sID, sName, count(*) from Apply, Student
